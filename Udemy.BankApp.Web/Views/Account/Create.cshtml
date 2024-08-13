@@ -1,0 +1,32 @@
+﻿@model UserListModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row mt-3">
+    <div class="col-6">
+        <h3>
+            Hesap Eklenecek Kişinin Bilgileri
+        </h3>
+        <p>Kullanıcının Adı: @Model.Name</p>
+        <p>Kullanıcının Soyadı: @Model.SurName</p>
+        <p>Kullanıcının Aktif Hesap Sayısı: <getAccountCount application-user-id="@Model.Id"></getAccountCount></p>
+    </div>
+    <div class="col-6">
+        <!--model binding name'e göre hareket eder bizim modelimizdeki property alan adları ile buradaki formda name aynı olursa model binding oluyor-->
+        <form asp-action="Create" asp-controller="Account" method="post">
+            <input type="hidden" name="ApplicationUserId" value="@Model.Id"/>
+            <div class="mb-3">
+                <label class="form-label">Hesap Numarası: </label>
+                <input type="number" name="AccountNumber" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Bakiye:</label>
+                <input type="number" name="Balance" class="form-control"/>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
